@@ -1,0 +1,26 @@
+scrapy
+scrapy-user-agents
+scrapy-playwright
+playwright
+loguru
+tqdm
+beautifulsoup4
+polars
+pandas
+pyarrow
+plotly
+scipy
+nbformat
+statsmodels
+unidecode
+scikit-learn
+shap
+joblib
+ipython
+matplotlib
+
+# For development
+ipython
+ruff
+isort
+pre-commit
