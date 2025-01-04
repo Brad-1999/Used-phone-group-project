@@ -96,11 +96,13 @@ I. Price-related Hypotheses:
 03.   **Hypothesis 3:** *There is a statistically significant difference in prices among phones with different colors.*
 
 II. Seller/Rating-related Hypotheses:
+
 04.   **Hypothesis 4:** *There is a statistically significant positive correlation between seller ratings and phone prices.*
 05.   **Hypothesis 5:** *Company sellers have a statistically significant higher average rating than individual sellers.*
 06.   **Hypothesis 6:** *There is a statistically significant positive correlation between the number of `sold_ads` and seller average ratings.*
 
 III. Geographic-related Hypotheses:
+
 07.   **Hypothesis 7:** *The mean price of phones in major cities (Hanoi, HCMC) is statistically significantly higher than the mean price of phones in other regions.*
 08.  **Hypothesis 8:** *There is a statistically significant association between brands and regions.*
 09.  **Hypothesis 9:** *The proportion of high-end phones is significantly higher in urban regions compared to rural regions.*
