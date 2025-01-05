@@ -90,6 +90,7 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
 
 *   **Feature Engineering:** using `src/utils.py`.
     <!-- -   Added `color_popularity_score` (numerical score of each color based on frequency). -->
+
     -   **Dominant Colors by Brand:**  A new feature, `dominant_colors_by_brand`, was engineered to capture the most frequent colors associated with each phone brand. This could potentially influence price.
 *   **Stratified Data Splitting (Optional):**  For model training, a stratified split was implemented to ensure that the training and testing datasets have similar distributions of key features, such as phone brand. This is handled in the `src/trainer.py` module.
 
@@ -235,7 +236,7 @@ To clean and preprocess the data, run the preprocessing script:
 ```
 
 * 5.3 **Train the Model:**
-To train the machine learning model, run the training script:
+To do feature standardization, transformation, feature engineering, and train the machine learning model, run the training script:
 
 ```bash
     python src/trainer.py
