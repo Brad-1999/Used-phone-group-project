@@ -123,7 +123,7 @@ We formulated and tested the following hypotheses:
 10.  **Hypothesis 10:** *The proportion of high-end phones is significantly higher in urban regions compared to rural regions.*
 
 *   **Statistical Tests Used:** We used t-tests, Mann-Whitney U tests, ANOVA, Chi-squared, Pearson correlation, and Spearman correlation based on the hypothesis and normality of the data.
-*   **Significance Level:** All hypothesis tests were conducted at a significance level (\(\alpha\)) of 0.05.
+*   **Significance Level:** All hypothesis tests were conducted at a significance level ((\alpha\)) of 0.05.
 *   **Multiple Comparisons Correction:**  Where applicable, Bonferroni correction was applied to adjust the significance level due to multiple comparisons.
 *   **Implementation:** The implementation and detailed results of each hypothesis test, along with supporting visualizations, can be found in the `notebooks/hypotheses_testing.ipynb` notebook.
 
