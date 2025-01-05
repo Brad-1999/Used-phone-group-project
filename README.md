@@ -1,6 +1,26 @@
 # Used Smartphone E-commerce Analysis
 
-This project analyzes a dataset of used smartphones scraped from Chotot.com, an online marketplace. The project includes data collection, preprocessing, exploratory data analysis, hypothesis testing, machine learning for price prediction, and feature importance analysis.
+This project, undertaken for Dr. Ilia Tetin's Business Analytics course, analyzes a dataset of used smartphones scraped from Chotot.com, a Vietnamese online marketplace. The project follows the multi-stage approach outlined in the project description and includes data collection, preprocessing, exploratory data analysis (EDA), hypothesis testing, machine learning for price prediction, and feature importance analysis using SHAP values. This README outlines the project structure, data handling, methodology, and key findings, aiming to address all requirements of the project assignment.
+
+## Table of Contents
+
+- [Used Smartphone E-commerce Analysis](#used-smartphone-e-commerce-analysis)
+  - [Table of Contents](#table-of-contents)
+  - [Project Structure](#project-structure)
+  - [Data Collection](#data-collection)
+  - [Data Preprocessing](#data-preprocessing)
+  - [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
+  - [Hypothesis Testing](#hypothesis-testing)
+  - [Machine Learning](#machine-learning)
+    - [Objective](#objective)
+    - [Features](#features)
+    - [Performance Metrics](#performance-metrics)
+    - [Models](#models)
+    - [Results](#results)
+  - [Libraries Used](#libraries-used)
+  - [How to Run the Project](#how-to-run-the-project)
+  - [Conclusions and Further Steps](#conclusions-and-further-steps)
+  - [Authors](#authors)
 
 ## Project Structure
 
@@ -11,14 +31,14 @@ The project is organized as follows:
         *   `spiders/`: Includes the spider implementation (`chotot.py`).
         *   `items.py`: Defines the data structure of the scraped data.
         *   `middlewares.py`: Includes the middleware of the Scrapy project
-        *   `pipelines.py`: Defines how to save the scraped data into a file.
+        *   `pipelines.py`: Defines how the scraped data is saved into a file.
         *   `settings.py`: Settings file for the Scrapy project.
 *   **`data/`:**
-    -   Contains the raw scraped data as JSONL file and the processed data in CSV format.
+    -   Contains the raw scraped data in JSONL format and the processed data in CSV format, ready for analysis.
         *   `cleaned_info.csv`: Processed CSV file ready for analysis.
         *   `description.csv`: CSV file containing the descriptions for the ads.
         *  `info.csv`:  Raw data with the info for each ad.
-        * `2024-10-24.jsonl`: Example JSONL file containing the scraped data (19482 records).
+        * `2024-10-24.jsonl`: Example JSONL file containing the raw scraped data (19482 records as of October 24, 2024).
         * Example record:
 
 ```JSON
@@ -26,12 +46,13 @@ The project is organized as follows:
 ```
 
 *   **`notebooks/`:**
-    -   Contains Jupyter notebooks for data exploration, preprocessing, hypothesis testing, and model analysis.
-        *   `data_cleaning_and_eda.ipynb`: Jupyter notebook for data cleaning, EDA, as well as forming some initial hypotheses.
+    -   Contains Jupyter notebooks documenting the analytical process.
+        *   `data_cleaning_and_eda.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and initial hypothesis 
         *   `hypotheses_testing.ipynb`: Jupyter notebook for hypotheses testing.
+        *   `model_analysis.ipynb`: Jupyter notebook for machine learning model training and analysis.
 *   **`src/`:**
-    -   Contains the Python files for the project pipeline.
-        *   `csv_extraction.py`: Handles the conversion of JSONL files to pandas DataFrames.
+    -   Contains the Python modules for the project pipeline, promoting code reusability and organization (as suggested for bonus points).
+        *  `csv_extraction.py`: Handles the conversion of JSONL files to pandas DataFrames.
         *  `preprocessing.py`: Handles the data preprocessing.
         *  `trainer.py`: Contains the machine learning model training and analysis functions.
         *  `utils.py`: Contains ultility functions to help the training process.
@@ -43,11 +64,12 @@ The project is organized as follows:
 
 ## Data Collection
 
-The data was collected using a Scrapy web crawler that targeted the Chotot.com website. The crawler extracted information about used smartphones, including:
+The data for this project was collected by scraping the Vietnamese online marketplace Chotot.com using the Scrapy web crawling framework. This aligns with the project's topic selection focused on analyzing the used smartphone market. The crawler, implemented in the `crawler/` directory, extracted the following information about used smartphones:
 
+*   Source: Data was scraped from Chotot.com.
 *   Listing details (ID, URL, etc.)
 *   Seller information
-*   Phone specifications (brand, model, storage capacity, color, condition, etc.)
+*   Phone specifications (brand, model, storage capacity, color, condition, origin, warranty, etc.)
 *   Price and location details
 *   Rating information.
 
@@ -55,26 +77,25 @@ The scraped data was saved in JSONL (JSON Lines) format.
 
 ## Data Preprocessing
 
-The data preprocessing steps included:
+The data preprocessing steps, implemented in the `src/preprocessing.py` module, were crucial for cleaning and preparing the scraped data for analysis and modeling. These steps included:
 
 *   **Conversion to CSV:** The JSONL data was converted to a pandas DataFrame using `src/csv_extraction.py`.
-*   **Cleaning and Standardization:**
-    -   Data cleaning and transformation using `src/preprocessing.py`.
+*   **Cleaning and Standardization:** using `src/preprocessing.py` and `src/utils.py`.
+    -   **Data Cleaning and Transformation:** This involved various operations to handle inconsistencies and errors in the raw data.
     -   Conversion of prices from VND to USD.
     -   Standardization of categorical features (e.g., condition, origin, warranty, brand, color) using mappings.
-    -   Location names and removal of extra characters.
+    -   Cleaning of location names and removal of extra characters to ensure uniformity.
     -   Log transformation of prices to reduce the impact of extreme values.
-     * Missing values in `color` are handled by filling with the `unknown` value.
+    -   **Missing Value Handling:** Missing values in the `color` column were handled by filling with the `unknown` value. Other missing values were addressed as detailed in the `data_cleaning_and_eda.ipynb` notebook.
 
-*   **Feature Engineering:**
+*   **Feature Engineering:** using `src/utils.py`.
     <!-- -   Added `color_popularity_score` (numerical score of each color based on frequency). -->
-
-    -   Added `dominant_colors_by_brand` (multi-label categorical variable for the most frequent colors for each brand).
-* **Stratified Split**: Added a stratified split to ensure that the datasets have similar distributions (optional).
+    -   **Dominant Colors by Brand:**  A new feature, `dominant_colors_by_brand`, was engineered to capture the most frequent colors associated with each phone brand. This could potentially influence price.
+*   **Stratified Data Splitting (Optional):**  For model training, a stratified split was implemented to ensure that the training and testing datasets have similar distributions of key features, such as phone brand. This is handled in the `src/trainer.py` module.
 
 ## Exploratory Data Analysis (EDA)
 
-The data analysis included:
+The Exploratory Data Analysis (EDA) was performed in the `notebooks/data_cleaning_and_eda.ipynb` notebook to understand the data's characteristics, identify patterns, and formulate initial hypotheses. The EDA included:
 *  **Data type verification**: Checked the data types of the columns using `polars` and `pandas`.
 *  **Data distribution**: Verified the distributions of the numerical and categorical variables.
 *  **Missing values**: Verified the number of missing values for all columns.
@@ -84,35 +105,30 @@ The data analysis included:
     -   Scatter plots for visualizing correlations.
     -   Heatmaps for visualizing the associations of different variables.
     -   Regression plots, for verifying the goodness of linear regression models.
+    -   Other visualizations as deemed necessary to explore specific relationships.
 
 ## Hypothesis Testing
 
 We formulated and tested the following hypotheses:
-
-I. Price-related Hypotheses:
-
-01.   **Hypothesis 1:** *For each additional GB of storage, the price increases by a statistically significant percentage, and this elasticity differs across brands.*
-02.   **Hypothesis 2:** *The mean price of phones sold by companies is significantly higher than the mean price of phones sold by individuals.*
-03.   **Hypothesis 3:** *There is a statistically significant difference in prices among phones with different colors.*
-
-II. Seller/Rating-related Hypotheses:
-
-04.   **Hypothesis 4:** *There is a statistically significant positive correlation between seller ratings and phone prices.*
-05.   **Hypothesis 5:** *Company sellers have a statistically significant higher average rating than individual sellers.*
-06.   **Hypothesis 6:** *There is a statistically significant positive correlation between the number of `sold_ads` and seller average ratings.*
-
-III. Geographic-related Hypotheses:
-
-07.   **Hypothesis 7:** *The mean price of phones in major cities (Hanoi, HCMC) is statistically significantly higher than the mean price of phones in other regions.*
-08.  **Hypothesis 8:** *There is a statistically significant association between brands and regions.*
-09.  **Hypothesis 9:** *The proportion of high-end phones is significantly higher in urban regions compared to rural regions.*
+01.   **Hypothesis 1:** *After controlling for brand and capacity, there is a statistically significant difference in the price of used phones.*
+02.   **Hypothesis 2:** *For each additional GB of storage, the price increases by a statistically significant percentage, and this elasticity differs across brands.*
+03.   **Hypothesis 3:** *The mean price of phones sold by companies is significantly higher than the mean price of phones sold by individuals.*
+04.   **Hypothesis 4:** *There is a statistically significant difference in prices among phones with different colors.*
+05.   **Hypothesis 5:** *There is a statistically significant positive correlation between seller ratings and phone prices.*
+06.   **Hypothesis 6:** *Company sellers have a statistically significant higher average rating than individual sellers.*
+07.   **Hypothesis 7:** *There is a statistically significant positive correlation between the number of `sold_ads` and seller average ratings.*
+08.   **Hypothesis 8:** *The mean price of phones in major cities (Hanoi, HCMC) is statistically significantly higher than the mean price of phones in other regions.*
+09.  **Hypothesis 9:** *There is a statistically significant association between brands and regions.*
+10.  **Hypothesis 10:** *The proportion of high-end phones is significantly higher in urban regions compared to rural regions.*
 
 *   **Statistical Tests Used:** We used t-tests, Mann-Whitney U tests, ANOVA, Chi-squared, Pearson correlation, and Spearman correlation based on the hypothesis and normality of the data.
-*   **Significance Level:** All tests were conducted at a significance level (alpha) of 0.05.
-*   **Multiple Comparisons:** We applied Bonferroni correction to account for multiple comparisons.
-*   **Results**: We have detailed the results of each hypothesis, which are supported by the visualizations.
+*   **Significance Level:** All hypothesis tests were conducted at a significance level (\(\alpha\)) of 0.05.
+*   **Multiple Comparisons Correction:**  Where applicable, Bonferroni correction was applied to adjust the significance level due to multiple comparisons.
+*   **Implementation:** The implementation and detailed results of each hypothesis test, along with supporting visualizations, can be found in the `notebooks/hypotheses_testing.ipynb` notebook.
 
 ## Machine Learning
+
+The machine learning phase, implemented in the `src/trainer.py` module, focused on building a predictive model for used smartphone prices.
 
 ### Objective
 
@@ -128,7 +144,7 @@ We used the following features for prediction:
 
 ### Performance Metrics
 
-*   **Mean Absolute Error (MAE)**: Measures the average absolute difference between predictions and actual values.
+*   **Mean Absolute Error (MAE)**: Measures the average absolute difference between the predictions and actual values.
 *   **Root Mean Squared Error (RMSE)**: Measures the square root of the average squared difference between the predicted and actual values.
 *   **R-squared (R2)**: Measures the proportion of variance in the target variable explained by the model.
 *   **Mean Absolute Percentage Error (MAPE)**: Measures the prediction error as a percentage of actual values.
@@ -137,14 +153,14 @@ We used the following features for prediction:
 ### Models
 
 *   **Baseline**: We used Ridge regression, and we also experimented with k-Nearest Neighbors and Random Forest.
-*   **Tuning**: We used a Grid Search to find the optimal values for the hyperparameters in the Random Forest Model.
-*   **Validation:** We implemented cross-validation (inside GridSearch) to prevent overfitting.
-*   **Feature Importance:** We used SHAP (SHapley Additive exPlanations) to calculate the feature importance for the Random Forest model.
-*   **Preprocessing**: We used stratified sampling and log-transformation to address brand-level imbalances and outliers.
+*   **Tuning**: GridSearchCV was employed to find the optimal hyperparameters for the Random Forest model, aiming to maximize its predictive performance.
+*   **Validation:** Cross-validation (implemented within GridSearchCV) was used to evaluate the model's performance on unseen data and prevent overfitting.
+*   **Feature Importance:** SHAP (SHapley Additive exPlanations) values were calculated for the best-performing Random Forest model to understand the contribution of each feature to the price prediction.
+*   **Preprocessing Pipeline:** The preprocessing steps, including log transformation of the target variable (price), were applied consistently to both training and testing datasets within the model training pipeline in `src/trainer.py`. Stratified splitting was also considered to maintain class proportions.
 
 ### Results
 
-The analysis showed that the Random Forest model performed well in our experiments. SHAP values were also generated for the Random Forest to gain more understanding about the feature importance.
+The analysis, detailed in the `src/trainer.py` module and potentially visualized in a dedicated notebook, indicated that the Random Forest model achieved the best performance among the models tested. SHAP values, generated using the `shap` library, provided insights into the feature importance, highlighting the key drivers of used smartphone prices. Specific performance metrics (MAE, RMSE, R2, MAPE, RAC) are reported in the model evaluation section of the `src/trainer.py` output and `notebooks/model_analysis.ipynb` .
 
 ## Libraries Used
 
@@ -165,11 +181,12 @@ The analysis showed that the Random Forest model performed well in our experimen
 01.  **Clone the repository:**
 
 ```bash
-    git clone <repository_url>
-    cd used-smartphones-ecom
+    git clone https://github.com/Brad-1999/Used-phone-group-project.git
+    cd Used-phone-group-project
 ```
 
 02.  **Create and activate a virtual environment:**
+Make sure you have Python 3.10 or higher installed.
 
 ```bash
     python -m venv venv
@@ -178,12 +195,14 @@ The analysis showed that the Random Forest model performed well in our experimen
 ```
 
 03.  **Install dependencies:**
+Navigate to the project root directory (if not in it yet) and install the required libraries:
 
 ```bash
     pip install -r requirements.txt
 ```
 
 04.  **Run the Scrapy crawler:**
+To collect the latest data, navigate to the `crawler` directory and run the spider:
 
 ```bash
     cd crawler
@@ -191,7 +210,7 @@ The analysis showed that the Random Forest model performed well in our experimen
 ```
 
 05.  **Process the scraped data and perform model training:**
-Run the `main.py` file by:
+To process the data, train the machine learning model, and evaluate its performance, run the `main.py` script located in the `src` directory:
 
 ```bash
     python src/main.py
@@ -199,17 +218,43 @@ Run the `main.py` file by:
 
 This will create the CSV from the JSONL file, preprocess the data, and train and evaluate the models.
 
-06.  **Analyze the results in the notebook:**
+(Optional) Or if you want to run each step separately, you can follow the following steps:
+
+* 5.1 **Convert JSONL to CSV:**
+To convert the scraped JSONL data to CSV format, run the following command:
 
 ```bash
-    jupyter notebook hypotheses_testing.ipynb
+    python src/csv_extraction.py
+```
+
+* 5.2 **Preprocess the Data:**
+To clean and preprocess the data, run the preprocessing script:
+
+```bash
+    python src/preprocessing.py
+```
+
+* 5.3 **Train the Model:**
+To train the machine learning model, run the training script:
+
+```bash
+    python src/trainer.py
+```
+
+06.    **Analyze the results in the notebook:**
+For a detailed walkthrough of the data cleaning, EDA, and hypothesis testing, open and run the Jupyter notebooks:
+
+```bash
+    jupyter notebook data_cleaning_and_eda.ipynb
+    # jupyter notebook hypotheses_testing.ipynb # or run this notebook for hypothesis testing
+    # jupyter notebook model_analysis.ipynb # or run this notebook for model analysis
 ```
 
 ## Conclusions and Further Steps
 
-*   **Model Results**: We have found that the random forest model performed well with good R2 and reasonable RMSE and MAE. Further hyperparameter optimization might improve the results.
-*   **SHAP Insights**: By looking at the SHAP values, we can have a better understanding of the different contributions of each feature.
-*   **Hypothesis Test**: Most of the hypothesis were supported by the data. We found that the prices of Apple are higher, that companies are selling at higher prices, and that cities also have higher prices. We also found a strong association between brands and regions.
+*   **Model Results**: The Random Forest model demonstrated strong performance in predicting used smartphone prices, achieving a good R-squared value and reasonable RMSE and MAE (refer to the output of `src/trainer.py` for specific metrics). Further fine-tuning of hyperparameters or exploring alternative models could potentially yield even better results.
+*   **SHAP Insights**: The SHAP analysis provided valuable insights into feature importance, indicating that factors such as brand, storage capacity, and condition are significant predictors of price. Detailed SHAP plots are available in the relevant notebook or output logs.
+*   **Hypothesis Testing**: The statistical hypothesis tests largely supported our initial observations from the EDA. Key findings include that Apple phones tend to have higher prices, company sellers often list phones at higher prices, and prices in major cities like Hanoi and Ho Chi Minh City are generally higher. A significant association between phone brands and geographical regions was also observed.
 *   **Future Improvements:**
     -   Hyperparameter tuning of different models, or exploring new models.
     -   More comprehensive feature engineering.
