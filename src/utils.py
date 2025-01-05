@@ -96,39 +96,35 @@ def load_and_preprocess_data(
                 pl.Series(name=f"{col}_{category}", values=encoded[:, i])
             )
     # Multilabel Encoding for `dominant_colors_by_brand`
-    # Create brand-color combination column.
-    df = df.with_columns((pl.col("brand") + "_" + pl.col("color")).alias("brand_color"))
-
     # Find top 2 most popular colors per brand
     top_colors_per_brand = (
-        df.group_by("brand_color")
+        df.group_by("brand", "color")
         .len()
-        .sort(by=["brand_color", "len"], descending=[False, True])
-        .group_by("brand_color")
+        .sort(["brand", "len"], descending=[False, True])
+        .group_by("brand")
         .head(2)
-        .group_by("brand_color")
-        .agg(pl.col("brand_color").alias("brand_color_2"))["brand_color_2"]
+        .with_columns((pl.col("brand") + "@" + pl.col("color")).alias("brand_color"))[
+            "brand_color"
+        ]
         .to_list()
     )
-    # Get all the colors, and brands from the top colors per brand
-    all_top_colors = [x.split("_")[1] for color in top_colors_per_brand for x in color]
 
-    # Group by brand, and create a list of the colors
+    # Group by brand and create a list of the colors
     top_colors = (
-        df.group_by("brand")
+        df.with_columns((pl.col("brand") + "@" + pl.col("color")).alias("brand_color"))
+        .group_by("brand")
         .agg(pl.col("brand_color").alias("brand_colors"))
         .to_pandas()
     )
 
-    # Create a mapping of top color for brand
-    mapping_dict = {
-        brand: [
-            color.split("_")[1]
-            for color in colors
-            if color.split("_")[1] in all_top_colors and color.split("_")[0] == brand
-        ]
-        for brand, colors in zip(top_colors["brand"], top_colors["brand_colors"])
-    }
+    mapping_dict = {}
+    for brand, colors in zip(top_colors["brand"], top_colors["brand_colors"]):
+        valid_colors = []
+        for entry in colors:
+            b, c = entry.split("@")
+            if entry in top_colors_per_brand:
+                valid_colors.append(c)
+        mapping_dict[brand] = valid_colors
 
     # Convert the mapping to a list of lists for MultiLabelBinarizer
     encoded_list = []

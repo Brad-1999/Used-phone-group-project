@@ -92,7 +92,7 @@ def evaluate_model(
     mape = (np.mean(np.abs((y_test_np - y_pred_np) / y_test_np)) * 100).item()
 
     # Calculate RAC
-    rac = np.sum(np.abs(y_test_np - y_pred_np) <= PRICE_THRESHOLD) / len(y_test)
+    rac = np.sum(np.abs(y_test_np - y_pred_np) <= PRICE_THRESHOLD) * 100 / len(y_test)
 
     metrics = {"mae": mae, "rmse": rmse, "r2": r2, "mape": mape, "rac @ 80USD": rac}
     return metrics
