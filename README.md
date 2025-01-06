@@ -74,10 +74,10 @@ The project is organized as follows:
     -   Contains Jupyter notebooks documenting the analytical process.
         *   `(STAGE 1 & 2) DATA COLLECTION_Chotot_com_SCRAPING.ipynb`: Jupyter notebook for data scraping from Chotot.com.
         *   `(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb`: Jupyter notebook for conversing JSONL to CSV files.
-        *   `(STAGE 3.2 & 4) - CLEANING DATA & VISUALIZATION - Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
-        *   `(STAGE 5) - FEATURE ENGINEERING - Chotot_com`: Jupyter notebook for developing the new feature
+        *   `(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION - Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
+        *   `(STAGE 5) FEATURE ENGINEERING - Chotot_com`: Jupyter notebook for developing the new feature
         *   `(STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb`: Jupyter notebook for hypotheses testing.
-        *   `(STAGE 7) - MACHINE LEARNING - Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
+        *   `(STAGE 7) MACHINE LEARNING - Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
 *   **`src/`:**
     -   Contains the Python modules for the project pipeline, promoting code reusability and organization (as suggested for bonus points).
         *  `csv_extraction.py`: Handles the conversion of JSONL files to pandas DataFrames.
@@ -114,7 +114,7 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
     -   Standardization of categorical features (e.g., condition, origin, warranty, brand, color) using mappings.
     -   Cleaning of location names and removal of extra characters to ensure uniformity.
     -   Log transformation of prices to reduce the impact of extreme values.
-    -   **Missing Value Handling:** Missing values in the `color` column were handled by filling with the `unknown` value. Other missing values were addressed as detailed in the `data_cleaning_and_eda.ipynb` notebook.
+    -   **Missing Value Handling:** Missing values in the `color` column were handled by filling with the `unknown` value. Other missing values were addressed as detailed in the `(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION - Chotot_com.ipynb` notebook.
 
 *   **Feature Engineering:** using `notebooks/(STAGE 5) FEATURE ENGINEERING_Chotot_com.ipynb` notebook or `src/utils.py`.
     <!-- -   Added `color_popularity_score` (numerical score of each color based on frequency). -->
@@ -124,7 +124,7 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
 
 ## Exploratory Data Analysis (EDA)
 
-The Exploratory Data Analysis (EDA) was performed in the `notebooks/data_cleaning_and_eda.ipynb` notebook to understand the data's characteristics, identify patterns, and formulate initial hypotheses. The EDA included:
+The Exploratory Data Analysis (EDA) was performed in the `notebooks/(STAGE 5) FEATURE ENGINEERING_Chotot_com.ipynb` notebook to understand the data's characteristics, identify patterns, and formulate initial hypotheses. The EDA included:
 *  **Data type verification**: Checked the data types of the columns using `polars` and `pandas`.
 *  **Data distribution**: Verified the distributions of the numerical and categorical variables.
 *  **Missing values**: Verified the number of missing values for all columns.
@@ -159,7 +159,7 @@ III. **Geographic-related Hypotheses:**
 09.  **Hypothesis 9:** *The proportion of high-end phones is significantly higher in urban regions compared to rural regions.*
 
 *   **Statistical Tests Used:** We used t-tests, Mann-Whitney U tests, ANOVA, Chi-squared, Pearson correlation, and Spearman correlation based on the hypothesis and normality of the data.
-*   **Significance Level:** All hypothesis tests were conducted at a significance level (\(\alpha\)) of 0.05.
+*   **Significance Level:** All hypothesis tests were conducted at a significance level ((\alpha\)) of 0.05.
 *   **Multiple Comparisons Correction:**  Where applicable, Bonferroni correction was applied to adjust the significance level due to multiple comparisons.
 *   **Implementation:** The implementation and detailed results of each hypothesis test, along with supporting visualizations, can be found in the `notebooks/(STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb` notebook.
 
