@@ -236,7 +236,7 @@ To clean and preprocess the data, run the preprocessing script:
 ```
 
 * 5.3 **Train the Model:**
-To do feature standarization, transformation, feature engineering, and train the machine learning model, run the training script:
+To do feature standardization, transformation, feature engineering, and train the machine learning model, run the training script:
 
 ```bash
     python src/trainer.py
