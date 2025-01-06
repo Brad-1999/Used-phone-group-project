@@ -4,13 +4,21 @@
 This project, conducted for Dr. Ilia Tetin's Business Analytics course, focuses on analyzing a dataset of used smartphones scraped from Chotot.com, a prominent Vietnamese e-commerce marketplace. The study adopts a multi-stage approach as outlined in the project description, encompassing the following key steps:
 
 •	Data Collection: Scraping listings from Chotot.com to create the dataset.
+
 •	Preprocessing: Cleaning and organizing the data for analysis and modeling.
+
 •	Exploratory Data Analysis (EDA): Identifying trends and patterns in the used smartphone market.
+
 •	Hypothesis Testing: Validating assumptions regarding factors affecting smartphone pricing.
+
 •	Machine Learning Models: Building models for price prediction using:
+
   o	Ridge Regression
+  
   o	K-Nearest Neighbors (KNN)
+  
   o	Random Forest
+  
 •	Feature Importance Analysis: Using SHAP (Shapley Additive exPlanations) values to interpret and rank feature contributions to price prediction.
 
 This README details the project structure, methodology, and key findings while addressing all requirements of the assignment.
@@ -20,6 +28,7 @@ This README details the project structure, methodology, and key findings while a
 The code-related files for each stage are organized as follows:
 
 •	Google Colab (IPYNB Files): Includes detailed explanations, step-by-step comments, and visualizations (e.g., distribution plots, boxplots, SHAP plots).
+
 •	Python Scripts (PY Files): Focus on concise and clean implementations of key code functions and methods in GitHub workflows.
 ![image](https://github.com/user-attachments/assets/bf9d1d8e-7490-4a9e-b7c8-5a2956cd0124)
 
@@ -88,7 +97,7 @@ The project is organized as follows:
 
 ## Data Collection
 
-The data for this project was collected by scraping the Vietnamese online marketplace Chotot.com using the Scrapy web crawling framework. This aligns with the project's topic selection, which focused on analyzing the used smartphone market. The crawler, which is implemented in the `notebooks/(STAGE 1 & 2) DATA COLLECTION_Chotot_com_SCRAPING.ipynb` or `crawler/` directory, extracted the following information about used smartphones:
+The data for this project was collected by scraping the Vietnamese online marketplace Chotot.com using the Scrapy web crawling framework. This aligns with the project's topic selection, which focused on analyzing the used smartphone market. The crawler, which is implemented in the `notebooks/(STAGE 1 & 2) DATA COLLECTION_Chotot_com_SCRAPING.ipynb` notebook or `crawler/` directory, extracted the following information about used smartphones:
 
 *   Source: Data was scraped from Chotot.com.
 *   Listing details (ID, URL, etc.)
@@ -103,8 +112,8 @@ The scraped data was saved in JSONL (JSON Lines) format.
 
 The data preprocessing steps, implemented in the `src/preprocessing.py` module, were crucial for cleaning and preparing the scraped data for analysis and modeling. These steps included:
 
-*   **Conversion to CSV:** The JSONL data was converted to a pandas DataFrame using `notebooks/(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb` or `src/csv_extraction.py`.
-*   **Cleaning and Standardization:** using `notebooks/(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION_Chotot_com.ipynb` or `src/preprocessing.py` and `src/utils.py`.
+*   **Conversion to CSV:** The JSONL data was converted to a pandas DataFrame using `notebooks/(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb` notebook or `src/csv_extraction.py`.
+*   **Cleaning and Standardization:** using `notebooks/(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION_Chotot_com.ipynb` notebook or `src/preprocessing.py` and `src/utils.py`.
     -   **Data Cleaning and Transformation:** This involved various operations to handle inconsistencies and errors in the raw data.
     -   Conversion of prices from VND to USD (The exchange rate is 1 USD (US Dollars) = 25,418 VND (Vietnam Thousand Dong) as of November 23, 2024).
     -   Standardization of categorical features (e.g., condition, origin, warranty, brand, color) using mappings.
@@ -112,7 +121,7 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
     -   Log transformation of prices to reduce the impact of extreme values.
     -   **Missing Value Handling:** Missing values in the `color` column were handled by filling with the `unknown` value. Other missing values were addressed as detailed in the `data_cleaning_and_eda.ipynb` notebook.
 
-*   **Feature Engineering:** using `notebooks/(STAGE 5) FEATURE ENGINEERING_Chotot_com.ipynb` or `src/utils.py`.
+*   **Feature Engineering:** using `notebooks/(STAGE 5) FEATURE ENGINEERING_Chotot_com.ipynb` notebook or `src/utils.py`.
     <!-- -   Added `color_popularity_score` (numerical score of each color based on frequency). -->
 
     -   **Dominant Colors by Brand:**  A new feature, `dominant_colors_by_brand`, was engineered to capture the most frequent colors associated with each phone brand. This could potentially influence price.
@@ -161,7 +170,7 @@ III. **Geographic-related Hypotheses:**
 
 ## Machine Learning
 
-The machine learning phase, implemented in the `notebooks/(STAGE 7) MACHINE LEARNING_Chotot_com.ipynb` or `src/trainer.py` module, focused on building a predictive model for used smartphone prices.
+The machine learning phase, implemented in the `notebooks/(STAGE 7) MACHINE LEARNING_Chotot_com.ipynb` notebook or `src/trainer.py` module, focused on building a predictive model for used smartphone prices.
 
 ### Objective
 
@@ -195,7 +204,7 @@ We used the following features for prediction:
 
 * The analysis, detailed in the `src/trainer.py` module and potentially visualized in a dedicated notebook, indicated that the Random Forest model achieved the best performance among the models tested.
 * SHAP values, generated using the `shap` library, provided insights into the feature importance, highlighting the key drivers of used smartphone prices.
-* Specific performance metrics (MAE, RMSE, R2, MAPE, RAC) are reported in the model evaluation section of the `src/trainer.py` output and `notebooks/(STAGE 7) MACHINE LEARNING_Chotot_com.ipynb`.
+* Specific performance metrics (MAE, RMSE, R2, MAPE, RAC) are reported in the model evaluation section of the `src/trainer.py` output and `notebooks/(STAGE 7) MACHINE LEARNING_Chotot_com.ipynb` notebook.
 
 ## Libraries Used
 
