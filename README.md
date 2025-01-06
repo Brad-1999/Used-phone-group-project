@@ -74,10 +74,10 @@ The project is organized as follows:
     -   Contains Jupyter notebooks documenting the analytical process.
         *   `(STAGE 1 & 2) DATA COLLECTION_Chotot_com_SCRAPING.ipynb`: Jupyter notebook for data scraping from Chotot.com.
         *   `(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb`: Jupyter notebook for conversing JSONL to CSV files.
-        *   `(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION - Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
+        *   `(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION_Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
         *   `(STAGE 5) FEATURE ENGINEERING - Chotot_com.ipynb`: Jupyter notebook for developing the new feature
         *   `(STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb`: Jupyter notebook for hypotheses testing.
-        *   `(STAGE 7) MACHINE LEARNING - Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
+        *   `(STAGE 7) MACHINE LEARNING_Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
 *   **`src/`:**
     -   Contains the Python modules for the project pipeline, promoting code reusability and organization (as suggested for bonus points).
         *  `csv_extraction.py`: Handles the conversion of JSONL files to pandas DataFrames.
@@ -114,9 +114,9 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
     -   Standardization of categorical features (e.g., condition, origin, warranty, brand, color) using mappings.
     -   Cleaning of location names and removal of extra characters to ensure uniformity.
     -   Log transformation of prices to reduce the impact of extreme values.
-    -   **Missing Value Handling:** Missing values in the `color` column were handled by filling with the `unknown` value. Other missing values were addressed as detailed in the `(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION - Chotot_com.ipynb` notebook.
+    -   **Missing Value Handling:** Missing values in the `color` column were handled by filling with the `unknown` value. Other missing values were addressed as detailed in the `notebooks/(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION_Chotot_com.ipynb` notebook.
 
-*   **Feature Engineering:** using `notebooks/(STAGE 5) FEATURE ENGINEERING_Chotot_com.ipynb` notebook or `src/utils.py`.
+*   **Feature Engineering:** using `notebooks/(STAGE 5) FEATURE ENGINEERING - Chotot_com.ipynb` notebook or `src/utils.py`.
     <!-- -   Added `color_popularity_score` (numerical score of each color based on frequency). -->
 
     -   **Dominant Colors by Brand:**  A new feature, `dominant_colors_by_brand`, was engineered to capture the most frequent colors associated with each phone brand. This could potentially influence price.
@@ -124,7 +124,7 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
 
 ## Exploratory Data Analysis (EDA)
 
-The Exploratory Data Analysis (EDA) was performed in the `notebooks/(STAGE 5) FEATURE ENGINEERING_Chotot_com.ipynb` notebook to understand the data's characteristics, identify patterns, and formulate initial hypotheses. The EDA included:
+The Exploratory Data Analysis (EDA) was performed in the `notebooks/(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION_Chotot_com.ipynb` notebook to understand the data's characteristics, identify patterns, and formulate initial hypotheses. The EDA included:
 *  **Data type verification**: Checked the data types of the columns using `polars` and `pandas`.
 *  **Data distribution**: Verified the distributions of the numerical and categorical variables.
 *  **Missing values**: Verified the number of missing values for all columns.
@@ -284,9 +284,9 @@ To do feature standardization, transformation, feature engineering, and train th
 For a detailed walkthrough of the data cleaning, EDA, and hypothesis testing, open and run the Jupyter notebooks:
 
 ```bash
-    jupyter notebook (STAGE 3.2 & 4) - CLEANING DATA & VISUALIZATION - Chotot_com.ipynb
+    jupyter notebook (STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION_Chotot_com.ipynb
     # jupyter notebook (STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb # or run this notebook for hypothesis testing
-    # jupyter notebook (STAGE 7) - MACHINE LEARNING - Chotot_com.ipynb # or run this notebook for model analysis
+    # jupyter notebook (STAGE 7) MACHINE LEARNING - Chotot_com.ipynb # or run this notebook for model analysis
 ```
 
 ## Conclusions and Further Steps
