@@ -30,7 +30,6 @@ The code-related files for each stage are organized as follows:
 •	Google Colab (IPYNB Files): Includes detailed explanations, step-by-step comments, and visualizations (e.g., distribution plots, boxplots, SHAP plots).
 
 •	Python Scripts (PY Files): Focus on concise and clean implementations of key code functions and methods in GitHub workflows.
-![image](https://github.com/user-attachments/assets/bf9d1d8e-7490-4a9e-b7c8-5a2956cd0124)
 
 ## Table of Contents
 
