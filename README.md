@@ -284,9 +284,9 @@ To do feature standardization, transformation, feature engineering, and train th
 For a detailed walkthrough of the data cleaning, EDA, and hypothesis testing, open and run the Jupyter notebooks:
 
 ```bash
-    jupyter notebook data_cleaning_and_eda.ipynb
-    # jupyter notebook hypotheses_testing.ipynb # or run this notebook for hypothesis testing
-    # jupyter notebook model_analysis.ipynb # or run this notebook for model analysis
+    jupyter notebook (STAGE 3.2 & 4) - CLEANING DATA & VISUALIZATION - Chotot_com.ipynb
+    # jupyter notebook (STAGE 6) - HYPOTHESES - Chotot_com.ipynb # or run this notebook for hypothesis testing
+    # jupyter notebook (STAGE 7) - MACHINE LEARNING - Chotot_com.ipynb # or run this notebook for model analysis
 ```
 
 ## Conclusions and Further Steps
