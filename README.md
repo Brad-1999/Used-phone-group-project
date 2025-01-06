@@ -38,7 +38,7 @@ The project is organized as follows:
         *   `cleaned_info.csv`: Processed CSV file ready for analysis.
         *   `description.csv`: CSV file containing the descriptions for the ads.
         *  `info.csv`:  Raw data with the info for each ad.
-        * `2024-10-24.jsonl`: Example JSONL file containing the raw scraped data (19482 records as of October 24, 2024).
+        * `2024-10-24.jsonl`: Example JSONL file containing the raw scraped data (19482 records as of October 24, 2024). The file can be obtained [here](https://drive.google.com/file/d/1jxSUwePVIdHIGZ1t3rYODfnzVxuTASXy/view?usp=sharing).
         * Example record:
 
 ```JSON
@@ -123,7 +123,7 @@ We formulated and tested the following hypotheses:
 10.  **Hypothesis 10:** *The proportion of high-end phones is significantly higher in urban regions compared to rural regions.*
 
 *   **Statistical Tests Used:** We used t-tests, Mann-Whitney U tests, ANOVA, Chi-squared, Pearson correlation, and Spearman correlation based on the hypothesis and normality of the data.
-*   **Significance Level:** All hypothesis tests were conducted at a significance level ((\alpha\)) of 0.05.
+*   **Significance Level:** All hypothesis tests were conducted at a significance level (\(\alpha\)) of 0.05.
 *   **Multiple Comparisons Correction:**  Where applicable, Bonferroni correction was applied to adjust the significance level due to multiple comparisons.
 *   **Implementation:** The implementation and detailed results of each hypothesis test, along with supporting visualizations, can be found in the `notebooks/hypotheses_testing.ipynb` notebook.
 
@@ -236,7 +236,7 @@ To clean and preprocess the data, run the preprocessing script:
 ```
 
 * 5.3 **Train the Model:**
-To do feature standardization, transformation, feature engineering, and train the machine learning model, run the training script:
+To do feature standarization, transformation, feature engineering, and train the machine learning model, run the training script:
 
 ```bash
     python src/trainer.py
