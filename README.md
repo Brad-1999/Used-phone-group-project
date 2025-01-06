@@ -21,11 +21,7 @@ This project, conducted for Dr. Ilia Tetin's Business Analytics course, focuses 
   
 •	Feature Importance Analysis: Using SHAP (Shapley Additive exPlanations) values to interpret and rank feature contributions to price prediction.
 
-This README details the project structure, methodology, and key findings while addressing all requirements of the assignment.
-
-# Project Structure
-
-The code-related files for each stage are organized as follows:
+This README details the project structure, methodology, and key findings while addressing all requirements of the assignment. The code-related files for each stage are organized as follows:
 
 •	Google Colab (IPYNB Files): Includes detailed explanations, step-by-step comments, and visualizations (e.g., distribution plots, boxplots, SHAP plots).
 
