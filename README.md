@@ -47,9 +47,12 @@ The project is organized as follows:
 
 *   **`notebooks/`:**
     -   Contains Jupyter notebooks documenting the analytical process.
-        *   `data_cleaning_and_eda.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and initial hypothesis 
-        *   `hypotheses_testing.ipynb`: Jupyter notebook for hypotheses testing.
-        *   `model_analysis.ipynb`: Jupyter notebook for machine learning model training and analysis.
+        *   `(STAGE 1 & 2) DATA COLLECTION_Chotot_com_SCRAPING.ipynb`: Jupyter notebook for data scraping from Chotot.com.
+        *   `(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb`: Jupyter notebook for conversing JSONL to CSV files.
+        *   `(STAGE 3.2 & 4) - CLEANING DATA & VISUALIZATION - Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
+        *   `(STAGE 5) - FEATURE ENGINEERING - Chotot_com`: Jupyter notebook for developing the new feature
+        *   `(STAGE 6) - HYPOTHESES - Chotot_com.ipynb`: Jupyter notebook for hypotheses testing.
+        *   `(STAGE 7) - MACHINE LEARNING - Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
 *   **`src/`:**
     -   Contains the Python modules for the project pipeline, promoting code reusability and organization (as suggested for bonus points).
         *  `csv_extraction.py`: Handles the conversion of JSONL files to pandas DataFrames.
@@ -82,7 +85,7 @@ The data preprocessing steps, implemented in the `src/preprocessing.py` module, 
 *   **Conversion to CSV:** The JSONL data was converted to a pandas DataFrame using `src/csv_extraction.py`.
 *   **Cleaning and Standardization:** using `src/preprocessing.py` and `src/utils.py`.
     -   **Data Cleaning and Transformation:** This involved various operations to handle inconsistencies and errors in the raw data.
-    -   Conversion of prices from VND to USD.
+    -   Conversion of prices from VND to USD (The exchange rate is 1 USD (US Dollars) = 25,418 VND (Vietnam Thousand Dong) as of November 23, 2024).
     -   Standardization of categorical features (e.g., condition, origin, warranty, brand, color) using mappings.
     -   Cleaning of location names and removal of extra characters to ensure uniformity.
     -   Log transformation of prices to reduce the impact of extreme values.
@@ -111,7 +114,8 @@ The Exploratory Data Analysis (EDA) was performed in the `notebooks/data_cleanin
 ## Hypothesis Testing
 
 We formulated and tested the following hypotheses:
-01.   **Hypothesis 1:** *After controlling for brand and capacity, there is a statistically significant difference in the price of used phones.*
+I. **Price-related Hypotheses:**
+
 02.   **Hypothesis 2:** *For each additional GB of storage, the price increases by a statistically significant percentage, and this elasticity differs across brands.*
 03.   **Hypothesis 3:** *The mean price of phones sold by companies is significantly higher than the mean price of phones sold by individuals.*
 04.   **Hypothesis 4:** *There is a statistically significant difference in prices among phones with different colors.*
@@ -153,15 +157,17 @@ We used the following features for prediction:
 
 ### Models
 
-*   **Baseline**: We used Ridge regression, and we also experimented with k-Nearest Neighbors and Random Forest.
+*   **Baseline**: Start with Ridge Regression to achieve a better balance between interpretability and performance. Then, experiment with k-Nearest Neighbors (kNN) to explore the impact of local patterns in the data. Incorporate Random Forest in the pipeline to capture non-linear interactions among features.
 *   **Tuning**: GridSearchCV was employed to find the optimal hyperparameters for the Random Forest model, aiming to maximize its predictive performance.
 *   **Validation:** Cross-validation (implemented within GridSearchCV) was used to evaluate the model's performance on unseen data and prevent overfitting.
-*   **Feature Importance:** SHAP (SHapley Additive exPlanations) values were calculated for the best-performing Random Forest model to understand the contribution of each feature to the price prediction.
 *   **Preprocessing Pipeline:** The preprocessing steps, including log transformation of the target variable (price), were applied consistently to both training and testing datasets within the model training pipeline in `src/trainer.py`. Stratified splitting was also considered to maintain class proportions.
+*   **Feature Importance:** SHAP (SHapley Additive exPlanations) values were calculated for the best-performing Random Forest model to understand the contribution of each feature to the price prediction.
 
 ### Results
 
-The analysis, detailed in the `src/trainer.py` module and potentially visualized in a dedicated notebook, indicated that the Random Forest model achieved the best performance among the models tested. SHAP values, generated using the `shap` library, provided insights into the feature importance, highlighting the key drivers of used smartphone prices. Specific performance metrics (MAE, RMSE, R2, MAPE, RAC) are reported in the model evaluation section of the `src/trainer.py` output and `notebooks/model_analysis.ipynb` .
+* The analysis, detailed in the `src/trainer.py` module and potentially visualized in a dedicated notebook, indicated that the Random Forest model achieved the best performance among the models tested.
+* SHAP values, generated using the `shap` library, provided insights into the feature importance, highlighting the key drivers of used smartphone prices.
+* Specific performance metrics (MAE, RMSE, R2, MAPE, RAC) are reported in the model evaluation section of the `src/trainer.py` output and `notebooks/model_analysis.ipynb`.
 
 ## Libraries Used
 
