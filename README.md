@@ -76,7 +76,7 @@ The project is organized as follows:
         *   `(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb`: Jupyter notebook for conversing JSONL to CSV files.
         *   `(STAGE 3.2 & 4) - CLEANING DATA & VISUALIZATION - Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
         *   `(STAGE 5) - FEATURE ENGINEERING - Chotot_com`: Jupyter notebook for developing the new feature
-        *   `(STAGE 6) - HYPOTHESES - Chotot_com.ipynb`: Jupyter notebook for hypotheses testing.
+        *   `(STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb`: Jupyter notebook for hypotheses testing.
         *   `(STAGE 7) - MACHINE LEARNING - Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
 *   **`src/`:**
     -   Contains the Python modules for the project pipeline, promoting code reusability and organization (as suggested for bonus points).
@@ -285,7 +285,7 @@ For a detailed walkthrough of the data cleaning, EDA, and hypothesis testing, op
 
 ```bash
     jupyter notebook (STAGE 3.2 & 4) - CLEANING DATA & VISUALIZATION - Chotot_com.ipynb
-    # jupyter notebook (STAGE 6) - HYPOTHESES - Chotot_com.ipynb # or run this notebook for hypothesis testing
+    # jupyter notebook (STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb # or run this notebook for hypothesis testing
     # jupyter notebook (STAGE 7) - MACHINE LEARNING - Chotot_com.ipynb # or run this notebook for model analysis
 ```
 
