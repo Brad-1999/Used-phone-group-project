@@ -75,7 +75,7 @@ The project is organized as follows:
         *   `(STAGE 1 & 2) DATA COLLECTION_Chotot_com_SCRAPING.ipynb`: Jupyter notebook for data scraping from Chotot.com.
         *   `(STAGE 3.1) - PREPROCESSING - CONVERSION TO CSV FILE - Chotot.com.ipynb`: Jupyter notebook for conversing JSONL to CSV files.
         *   `(STAGE 3.2 & 4) CLEANING DATA & VISUALIZATION - Chotot_com.ipynb`: Jupyter notebook for data cleaning, Exploratory Data Analysis (EDA), and preliminary hypotheses development.
-        *   `(STAGE 5) FEATURE ENGINEERING - Chotot_com`: Jupyter notebook for developing the new feature
+        *   `(STAGE 5) FEATURE ENGINEERING - Chotot_com.ipynb`: Jupyter notebook for developing the new feature
         *   `(STAGE 6) HYPOTHESES TESTING_Chotot_com.ipynb`: Jupyter notebook for hypotheses testing.
         *   `(STAGE 7) MACHINE LEARNING - Chotot_com.ipynb`: Jupyter notebook for machine learning model training and analysis.
 *   **`src/`:**
